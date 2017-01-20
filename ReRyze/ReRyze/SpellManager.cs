@@ -12,15 +12,13 @@ namespace ReRyze
         public static Spell.Targeted W { get; private set; }
         public static Spell.Targeted E { get; private set; }
         public static Spell.Skillshot R { get; private set; }
-        public static Spell.Targeted Ignite { get; private set; }
-        public static bool PlayerHasIgnite = true;
 
         public static readonly int[] ComboMode1 = { 0, 2, 0, 1, 0, 2, 0, 2 };
         public static readonly int[] ComboMode2 = { 0, 2, 2, 0, 1, 0, 2, 0 };
         public static int ComboStep;
-        public static int LaneClearStep;
         public static int LastCombo = 0;
         public static int LastLaneClear = 0;
+        public static int LastAutoHarass = 0;
 
         public static List<Spell.SpellBase> AllSpells { get; private set; }
         public static Dictionary<SpellSlot, Color> ColorTranslation { get; private set; }
@@ -31,10 +29,6 @@ namespace ReRyze
             W = new Spell.Targeted(SpellSlot.W, 600);
             E = new Spell.Targeted(SpellSlot.E, 600);
             R = new Spell.Skillshot(SpellSlot.R, 1500, SkillShotType.Circular);
-
-            Ignite = new Spell.Targeted(Player.Instance.FindSummonerSpellSlotFromName("ignite"), 550);
-            if (Player.Instance.FindSummonerSpellSlotFromName("ignite") == SpellSlot.Unknown)
-                PlayerHasIgnite = false;
 
             AllSpells = new List<Spell.SpellBase>(new Spell.SpellBase[] { Q, W, E, R });
             ColorTranslation = new Dictionary<SpellSlot, Color>

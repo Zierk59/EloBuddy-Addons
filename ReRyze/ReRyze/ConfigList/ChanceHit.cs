@@ -1,5 +1,4 @@
-﻿using EloBuddy;
-using EloBuddy.SDK.Enumerations;
+﻿using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
@@ -43,16 +42,15 @@ namespace ReRyze.ConfigList
             }
             return HitChance.Medium;
         }
-
         static ChanceHit()
         {
             Menu = Config.Menu.AddSubMenu("Hit chance");
             Menu.AddGroupLabel("Hit chance settings");
-            Menu.AddGroupLabel("[Low / Medium / High]");
-            _ComboMinToUseQ = Menu.Add("MinToUseQ", new Slider("Min. hit chance to use Q in combo.", 2, 1, 3));
-            _LCMinToUseQ = Menu.Add("LCMinToUseQ", new Slider("Min. hit chance to use Q in lane clear.", 1, 1, 3));
-            _HarassMinToUseQ = Menu.Add("HarassMinToUseQ", new Slider("Min. hit chance to use Q in harass mode.", 2, 1, 3));
-            _AutoHarassMinToUseQ = Menu.Add("AutoHarassMinToUseQ", new Slider("Min. hit chance to use Q in auto harass.", 1, 1, 3));
+            Menu.AddLabel("HitChance : 1 = Low, 2 = Medium, 3 = High");
+            _ComboMinToUseQ = Menu.Add("MinToUseQ", new Slider("Hit chance to use Q in combo.", 2, 1, 3));
+            _LCMinToUseQ = Menu.Add("LCMinToUseQ", new Slider("Hit chance to use Q in lane clear.", 1, 1, 3));
+            _HarassMinToUseQ = Menu.Add("HarassMinToUseQ", new Slider("Hit chance to use Q in harass mode.", 2, 1, 3));
+            _AutoHarassMinToUseQ = Menu.Add("AutoHarassMinToUseQ", new Slider("Hit chance to use Q in auto harass.", 1, 1, 3));
         }
 
         public static void Initialize()

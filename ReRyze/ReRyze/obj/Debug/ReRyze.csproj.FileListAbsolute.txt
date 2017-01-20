@@ -9,3 +9,4 @@ D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReRyze\ReRyze\bin\Debug\Newtonsoft.Js
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReRyze\ReRyze\obj\Debug\ReRyze.csprojResolveAssemblyReference.cache
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReRyze\ReRyze\obj\Debug\ReRyze.exe
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReRyze\ReRyze\obj\Debug\ReRyze.pdb
+D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReRyze\ReRyze\bin\Debug\EloBuddy.Sandbox.dll

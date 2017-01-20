@@ -10,7 +10,7 @@ namespace ReKatarina
         static Config()
         {
             Menu = MainMenu.AddMenu("ReKatarina", "ReKatarina");
-            Menu.AddGroupLabel("Welcome to ReKatarina! It's my second addon, be patient.");
+            Menu.AddGroupLabel("Welcome to ReKatarina REBORN!");
             Modes.Initialize();
         }
 
@@ -28,7 +28,6 @@ namespace ReKatarina
                 Farm.Initialize();
                 Harass.Initialize();
                 Flee.Initialize();
-                WardJump.Initialize();
                 Misc.Initialize();
             }
 

@@ -18,10 +18,9 @@ namespace ReRyze.ConfigList
         {
             Menu = Config.Menu.AddSubMenu("Ultimate");
             Menu.AddGroupLabel("Ultimate settings");
-            Menu.AddGroupLabel("Temporarily disabled");
 
             _TPUltKey = Menu.Add("TPUltKey", new KeyBind("Ult usage key", false, KeyBind.BindTypes.HoldActive, 'G'));
-            _MinAllyToTP = Menu.Add("MinAllyToTP", new Slider("Min allies to use ultimate.", 2, 0, 4));
+            _MinAllyToTP = Menu.Add("MinAllyToTP", new Slider("Min allies to use ultimate.", 1, 0, 4));
             _MinEnemyToTP = Menu.Add("MinEnemyToTP", new Slider("Min enemies to use ultimate.", 2, 1, 5));
         }
 

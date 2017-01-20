@@ -21,3 +21,4 @@ D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReGaren\ReGaren\bin\Debug\SharpDX.dll
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReGaren\ReGaren\bin\Debug\SharpDX.Direct3D9.dll
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReGaren\ReGaren\bin\Debug\Newtonsoft.Json.dll
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReGaren\ReGaren\obj\Debug\ReGaren.csprojResolveAssemblyReference.cache
+D:\Users\Reekspear\Desktop\EloBuddy-Addons\ReGaren\ReGaren\bin\Debug\EloBuddy.Sandbox.dll

@@ -20,3 +20,4 @@ D:\Users\Reekspear\Desktop\EloBuddy-Addons\LightAmumu\LightAmumu\obj\Debug\Light
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\LightAmumu\LightAmumu\bin\Debug\EloBuddy.dll
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\LightAmumu\LightAmumu\bin\Debug\EloBuddy.SDK.dll
 D:\Users\Reekspear\Desktop\EloBuddy-Addons\LightAmumu\LightAmumu\bin\Debug\SharpDX.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons\LightAmumu\LightAmumu\bin\Debug\EloBuddy.Sandbox.dll

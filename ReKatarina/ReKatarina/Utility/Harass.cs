@@ -16,9 +16,7 @@ namespace ReKatarina.Utility
             var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Mixed, Player.Instance.Position);
             if (target != null)
             {
-                Core.DelayAction(() => SpellManager.Q.Cast(target), ConfigList.Misc.GetSpellDelay);
-                if (Player.Instance.IsInRange(target, SpellManager.W.Range) && ConfigList.Harass.HarassWithW)
-                    Core.DelayAction(() => SpellManager.W.Cast(), ConfigList.Misc.GetSpellDelay + Damage.GetAditionalDelay());
+                SpellManager.Q.Cast(target);
             }
         }
     }

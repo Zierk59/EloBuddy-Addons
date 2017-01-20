@@ -10,42 +10,26 @@ namespace ReKatarina.Utility
     {
         public static void Execute()
         {
-            if (ConfigList.Farm.LastHitQ && SpellManager.Q.IsReady())
+            var creeps = EntityManager.MinionsAndMonsters.
+                Get(EntityManager.MinionsAndMonsters.EntityType.Both, EntityManager.UnitTeam.Enemy, Player.Instance.ServerPosition, SpellManager.Q.Range).
+                OrderBy(h => h.Health);
             {
-                var target = EntityManager.MinionsAndMonsters.EnemyMinions.Where(minion => minion.IsValidTarget(SpellManager.Q.Range));
-                if (target.Count() == 0)
-                    target = EntityManager.MinionsAndMonsters.Monsters.Where(monster => monster.IsValidTarget(SpellManager.Q.Range));
-
-                if (target != null)
+                if (ConfigList.Farm.LastHitQ && SpellManager.Q.IsReady())
                 {
-                    foreach (var select in target)
+                    foreach(var creep in creeps)
                     {
-                        if (select.IsValidTarget(SpellManager.Q.Range) && select.TotalShieldHealth() <= Damage.GetQDamage(select))
-                        {
-                            Core.DelayAction(() => SpellManager.Q.Cast(select), ConfigList.Misc.GetSpellDelay);
-                            return;
-                        }
+                        if (creep.IsValidTarget(SpellManager.Q.Range) && (creep.TotalShieldHealth() + 5) <= Damage.GetQDamage(creep) && creep.Distance(Player.Instance.Position) >= (Player.Instance.AttackRange*2))
+                            SpellManager.Q.Cast(creep);
                     }
                 }
             }
-            if (ConfigList.Farm.LastHitW && SpellManager.W.IsReady())
-            {
-                var target = EntityManager.MinionsAndMonsters.EnemyMinions.Where(minion => minion.IsValidTarget(SpellManager.W.Range));
-                if (target.Count() == 0)
-                    target = EntityManager.MinionsAndMonsters.Monsters.Where(monster => monster.IsValidTarget(SpellManager.W.Range));
+        }
 
-                if (target != null)
-                {
-                    foreach (var select in target)
-                    {
-                        if (select.IsValidTarget(SpellManager.W.Range) && select.TotalShieldHealth() <= Damage.GetWDamage(select))
-                        {
-                            Core.DelayAction(() => SpellManager.W.Cast(), ConfigList.Misc.GetSpellDelay + Game.Ping);
-                            return;
-                        }
-                    }
-                }
-            }
+        public static void OnUnkillableMinion(Obj_AI_Base target, Orbwalker.UnkillableMinionArgs args)
+        {
+            if (ConfigList.Farm.LastHitQ && SpellManager.Q.IsReady() && !Damage.HasRBuff() && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear | Orbwalker.ActiveModes.LastHit))
+                if (target.IsInRange(Player.Instance, SpellManager.Q.Range))
+                    SpellManager.Q.Cast(target);
         }
     }
 }

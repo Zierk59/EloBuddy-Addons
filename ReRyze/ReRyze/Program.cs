@@ -16,6 +16,9 @@ namespace ReRyze
 
         private static void Loading_OnLoadingComplete(EventArgs args)
         {
+            Chat.Print("ReRyze has been disabled. Wait for rework, soonTM.");
+            return;
+            /*
             if (Player.Instance.ChampionName != "Ryze")
             {
                 return;
@@ -26,8 +29,10 @@ namespace ReRyze
             Game.OnTick += OnTick;
             Game.OnUpdate += OnTick;
             Drawing.OnEndScene += OnEndScene;
+            Gapcloser.OnGapcloser += Gapcloser_OnGapcloser;
+            ReKatarina.ReCore.Loader.Initialize();
 
-            Chat.Print("ReRyze has been loaded. GL HF;");
+            Chat.Print("ReRyze has been loaded. GL HF;");*/
         }
 
         private static void OnEndScene(EventArgs args)
@@ -49,7 +54,6 @@ namespace ReRyze
             if (flags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
                 Combo.Execute();
-                Orbwalker.DisableMovement = false;
                 Orbwalker.DisableAttacking = false;
             }
             if (flags.HasFlag(Orbwalker.ActiveModes.Harass))
@@ -77,7 +81,16 @@ namespace ReRyze
                 UltimateTeleport.Execute();
             }
         }
-        
+
+        public static void Gapcloser_OnGapcloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs e)
+        {
+            if (Player.Instance.IsDead || !sender.IsEnemy || !ConfigList.Misc.GapCloser) return;
+            if (!SpellManager.W.IsReady() || !sender.IsValidTarget(SpellManager.W.Range)) return;
+
+            SpellManager.W.Cast(sender);
+            return;
+        }
+
         private static void OnDraw(EventArgs args)
         {
             if (Player.Instance.IsDead)

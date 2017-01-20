@@ -13,36 +13,53 @@ namespace ReRyze.Utility
             if (Environment.TickCount - SpellManager.LastLaneClear < Game.Ping * 2)
                 return;
 
-            int delay = Misc.GetSpellDelay + Damage.GetAditionalDelay();
+            int delay = 0;
             if (ConfigList.Farm.FarmQ && SpellManager.Q.IsReady() && Player.Instance.ManaPercent >= ManaManager.LaneClearQ_Mana && (Player.Instance.HasBuff("RyzeQIconFullCharge") || Player.Instance.HasBuff("RyzeQIconNoCharge")))
             {
-                var target = EntityManager.MinionsAndMonsters.EnemyMinions.Where(minion => minion.IsValidTarget(SpellManager.Q.Range));
-                if (target.Count() == 0)
-                    target = EntityManager.MinionsAndMonsters.Monsters.Where(monster => monster.IsValidTarget(SpellManager.Q.Range));
-
-                var unit = target.FirstOrDefault();
-                if (unit.TotalShieldHealth() <= Damage.GetQDamage(unit) || unit.TotalShieldHealth() / Damage.GetQDamage(unit) > 2)
+                var target = new Obj_AI_Base();
+                target = Extesions.Entities.GetJungleMinion(SpellManager.Q.Range);
+                switch (target != null ? true : false)
                 {
-                    var predQ = SpellManager.Q.GetPrediction(unit);
-                    if (predQ.HitChance >= ChanceHit.GetHitChance(ChanceHit.LaneClearMinToUseQ))
-                        Core.DelayAction(() => SpellManager.Q.Cast(predQ.CastPosition), delay);
-
+                    case true: break; // jungle clear
+                    case false: // lane clear
+                        {
+                            target = EntityManager.MinionsAndMonsters.EnemyMinions.Where(minion => minion.IsValidTarget(SpellManager.Q.Range)).FirstOrDefault();
+                            break;
+                        }
                 }
+                if (target != null)
+                    if (target.TotalShieldHealth() <= Damage.GetQDamage(target) || target.TotalShieldHealth() / Damage.GetQDamage(target) > 2)
+                    {
+                        var predQ = SpellManager.Q.GetPrediction(target);
+                        if (predQ.HitChance >= ChanceHit.GetHitChance(ChanceHit.LaneClearMinToUseQ))
+                            Core.DelayAction(() => SpellManager.Q.Cast(predQ.CastPosition), delay);
+                    }
             }
             if (ConfigList.Farm.FarmE && SpellManager.E.IsReady() && Player.Instance.ManaPercent >= ManaManager.LaneClearE_Mana && !Player.Instance.HasBuff("RyzeQIconFullCharge"))
             {
-                var minions = EntityManager.MinionsAndMonsters.EnemyMinions.Where(minion => minion.IsValidTarget(SpellManager.E.Range));
-                var monsters = EntityManager.MinionsAndMonsters.Monsters.Where(monster => monster.IsValidTarget(SpellManager.E.Range));
-                if ((minions.Count() + monsters.Count()) != 0)
+                var target = new Obj_AI_Base();
+                target = Extesions.Entities.GetJungleMinion(SpellManager.E.Range);
+                switch (target != null ? true : false)
                 {
-                    var target = monsters;
-                    if (monsters.Count() == 0)
-                        target = minions;
+                    case true: // jungle clear
+                        {
+                            var monsters = EntityManager.MinionsAndMonsters.Monsters.Where(monster => monster.IsValidTarget(SpellManager.E.Range));
+                            if (!ConfigList.Farm.FarmEIgnore && monsters.Count() < ConfigList.Farm.FarmECount)
+                                return;
+                            break;
+                        }
+                    case false: // lane clear
+                        {
+                            var minions = EntityManager.MinionsAndMonsters.EnemyMinions.Where(minion => minion.IsValidTarget(SpellManager.E.Range));
+                            if (minions.Count() < ConfigList.Farm.FarmECount)
+                                return;
 
-                    if (target != null)
-                        if (minions.Count() >= ConfigList.Farm.FarmECount || (monsters.Count() > 0 && ConfigList.Farm.FarmEIgnore))
-                            SpellManager.E.Cast(target.FirstOrDefault());
+                            target = minions.FirstOrDefault();
+                            break;
+                        }
                 }
+                if (target != null)
+                    SpellManager.E.Cast(target);
             }
             SpellManager.LastLaneClear = Environment.TickCount;
         }

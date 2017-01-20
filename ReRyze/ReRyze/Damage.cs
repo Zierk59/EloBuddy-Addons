@@ -37,6 +37,13 @@ namespace ReRyze
             return 0;
         }
 
+        public static float GetIgniteDamage()
+        {
+            if (SummonersManager.Ignite.IsReady() && SummonersManager.PlayerHasIgnite)
+                return 50 + (Player.Instance.Level * 20);
+            return 0;
+        }
+
         public static double GetTotalDamage(Obj_AI_Base target)
         {
             var damage = 0.0;
@@ -44,6 +51,7 @@ namespace ReRyze
             damage += GetWDamage(target);
             damage += GetEDamage(target);
             damage += GetRDamage(target);
+            damage += GetIgniteDamage();
             damage += Player.Instance.GetAutoAttackDamage(target, true);
             return damage;
         }

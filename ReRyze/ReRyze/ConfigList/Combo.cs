@@ -13,9 +13,7 @@ namespace ReRyze.ConfigList
         private static readonly CheckBox _ComboWithoutQ;
         private static readonly CheckBox _ComboWithoutW;
         private static readonly CheckBox _ComboWithoutE;
-        private static readonly Slider _ComboLogic;
-
-        private static readonly CheckBox _SmartCombo;
+        private static readonly ComboBox _ComboLogic;
 
         public static bool ComboQ
         {
@@ -47,10 +45,6 @@ namespace ReRyze.ConfigList
         {
             get { return _ComboLogic.CurrentValue; }
         }
-        public static bool SmartCombo
-        {
-            get { return _SmartCombo.CurrentValue; }
-        }
 
         static Combo()
         {
@@ -60,14 +54,12 @@ namespace ReRyze.ConfigList
             _ComboW = Menu.Add("ComboW", new CheckBox("Use W in combo"));
             _ComboE = Menu.Add("ComboE", new CheckBox("Use E in combo"));
 
-            Menu.AddGroupLabel("Static combo");
+            Menu.AddGroupLabel("Combo logic");
+            _ComboLogic = Menu.Add("ComboLogic", new ComboBox("Select your combo", 0, "Smart combo", "Damage combo", "Passive combo"));
+            Menu.AddSeparator(15);
             _ComboWithoutQ = Menu.Add("ComboWithoutQ", new CheckBox("Allow to skip Q if not ready."));
             _ComboWithoutW = Menu.Add("ComboWithoutW", new CheckBox("Allow to skip W if not ready."));
             _ComboWithoutE = Menu.Add("ComboWithoutE", new CheckBox("Allow to skip E if not ready."));
-            _ComboLogic = Menu.Add("ComboLogic", new Slider("Select logic [QEQWQEQE] / [QEEQWQEQ]", 0, 0, 1));
-
-            Menu.AddGroupLabel("Dynamic combo");
-            _SmartCombo = Menu.Add("SmartCombo", new CheckBox("Use smart combo."));
         }
 
         public static void Initialize()

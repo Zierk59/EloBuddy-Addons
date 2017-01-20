@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -44,6 +44,10 @@
     <Reference Include="SharpDX">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\SharpDX.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.Direct3D9, Version=2.6.3.0, Culture=neutral, PublicKeyToken=2306ab36a61019a8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -65,9 +69,44 @@
     <Compile Include="ConfigList\Misc.cs" />
     <Compile Include="ConfigList\UltimateTeleport.cs" />
     <Compile Include="Damage.cs" />
+    <Compile Include="Extesions\Entities.cs" />
+    <Compile Include="Extesions\Vectors.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReCore\ConfigList\CItems.cs" />
+    <Compile Include="ReCore\ConfigList\Cleansers.cs" />
+    <Compile Include="ReCore\ConfigList\DItems.cs" />
+    <Compile Include="ReCore\ConfigList\OItems.cs" />
+    <Compile Include="ReCore\ConfigList\Protector.cs" />
+    <Compile Include="ReCore\ConfigList\Settings.cs" />
+    <Compile Include="ReCore\ConfigList\Summoners.cs" />
+    <Compile Include="ReCore\Core\DrawingsUpdater.cs" />
+    <Compile Include="ReCore\Core\Interfaces\IItem.cs" />
+    <Compile Include="ReCore\Core\Interfaces\ISpell.cs" />
+    <Compile Include="ReCore\Core\Items\ConsumerItems.cs" />
+    <Compile Include="ReCore\Core\Items\DeffensiveItems.cs" />
+    <Compile Include="ReCore\Core\Items\OffensiveItems.cs" />
+    <Compile Include="ReCore\Core\ItemUpdater.cs" />
+    <Compile Include="ReCore\Core\Spells\Barrier.cs" />
+    <Compile Include="ReCore\Core\Spells\Cleanse.cs" />
+    <Compile Include="ReCore\Core\Spells\Exhaust.cs" />
+    <Compile Include="ReCore\Core\Spells\Heal.cs" />
+    <Compile Include="ReCore\Core\Spells\Ignite.cs" />
+    <Compile Include="ReCore\Core\Spells\Smite.cs" />
+    <Compile Include="ReCore\Core\Spells\Snowball.cs" />
+    <Compile Include="ReCore\Core\SummonerUpdater.cs" />
+    <Compile Include="ReCore\Databases\DangerousSpells.cs" />
+    <Compile Include="ReCore\Loader.cs" />
+    <Compile Include="ReCore\Managers\DangerManager.cs" />
+    <Compile Include="ReCore\Managers\EntityManager.cs" />
+    <Compile Include="ReCore\Managers\InfoManager.cs" />
+    <Compile Include="ReCore\Managers\ItemManager.cs" />
+    <Compile Include="ReCore\Managers\SummonerManager.cs" />
+    <Compile Include="ReCore\Utility\ItemsList.cs" />
+    <Compile Include="ReCore\Utility\MenuHelper.cs" />
+    <Compile Include="ReCore\Utility\SummonerList.cs" />
     <Compile Include="SpellManager.cs" />
+    <Compile Include="SummonersManager.cs" />
     <Compile Include="Utility\Combo.cs" />
     <Compile Include="Utility\Farm.cs" />
     <Compile Include="Utility\Flee.cs" />

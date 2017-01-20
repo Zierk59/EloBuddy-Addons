@@ -13,13 +13,11 @@ namespace ReRyze.Utility
                 return true;
             return false;
         }
+
         public static void Execute()
         {
             if (Environment.TickCount - SpellManager.LastCombo > 3000)
                 SpellManager.ComboStep = 0;
-
-            if (Environment.TickCount - SpellManager.LastLaneClear > 3000)
-                SpellManager.LastLaneClear = 0;
 
             // Auto range update
             if (SpellManager.R.Level >= 2 && SpellManager.R.Range == Damage.UltimateRange[0])
@@ -34,36 +32,43 @@ namespace ReRyze.Utility
             var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical, Player.Instance.Position);
             if (target != null && target.IsValid())
             {
-                // Auto KS 
-                if (SpellManager.Q.IsReady() && ConfigList.Misc.KSWithQ && Damage.GetQDamage(target) - 5 >= target.TotalShieldHealth())
+                // Auto KS
+                if (target.HealthPercent >= 15.0)
                 {
-                    var predQ = SpellManager.Q.GetPrediction(target);
-                    if (predQ.HitChance >= HitChance.Medium)
+                    if (SpellManager.Q.IsReady() && ConfigList.Misc.KSWithQ && Damage.GetQDamage(target) - 5 >= target.TotalShieldHealth())
                     {
-                        SpellManager.Q.Cast(predQ.CastPosition); return;
+                        var predQ = SpellManager.Q.GetPrediction(target);
+                        if (predQ.HitChance >= HitChance.Medium)
+                        {
+                            SpellManager.Q.Cast(predQ.CastPosition); return;
+                        }
                     }
+                    if (SpellManager.W.IsReady() && ConfigList.Misc.KSWithW && Damage.GetWDamage(target) - 5 >= target.TotalShieldHealth())
+                    {
+                        SpellManager.W.Cast(target);
+                        return;
+                    }
+                    if (SpellManager.E.IsReady() && ConfigList.Misc.KSWithE && Damage.GetEDamage(target) - 5 >= target.TotalShieldHealth())
+                        SpellManager.E.Cast(target);
                 }
-                if (SpellManager.W.IsReady() && ConfigList.Misc.KSWithW && Damage.GetWDamage(target) - 5 >= target.TotalShieldHealth())
-                {
-                    SpellManager.W.Cast(target); 
-                    return;
-                }
-                if (SpellManager.E.IsReady() && ConfigList.Misc.KSWithE && Damage.GetEDamage(target) - 5 >= target.TotalShieldHealth())
-                    SpellManager.E.Cast(target);
 
                 // Auto harass
-                if (!ConfigList.Harass.AutoHarassUnderTurret && Player.Instance.IsUnderEnemyturret() && target.IsUnderHisturret())
-                    return;
-
-                if (!chance(ConfigList.Harass.AutoHarassChance))
-                    return;
-
-                if (SpellManager.Q.IsReady() && ConfigList.Harass.AutoHarassWithQ && Player.Instance.ManaPercent >= ConfigList.ManaManager.AutoHarassQ_Mana)
+                if (Environment.TickCount - SpellManager.LastAutoHarass < 1500 && ConfigList.Harass.AutoHarassWithQ)
                 {
-                    var predQ = SpellManager.Q.GetPrediction(target);
-                    if (predQ.HitChance >= ConfigList.ChanceHit.GetHitChance(ConfigList.ChanceHit.AutoHarassMinToUseQ))
+                    if (!ConfigList.Harass.AutoHarassUnderTurret && Player.Instance.IsUnderEnemyturret() && target.IsUnderHisturret())
+                        return;
+
+                    if (!chance(ConfigList.Harass.AutoHarassChance))
+                        return;
+
+                    if (SpellManager.Q.IsReady() && Player.Instance.ManaPercent >= ConfigList.ManaManager.AutoHarassQ_Mana)
                     {
-                        SpellManager.Q.Cast(predQ.CastPosition); return;
+                        var predQ = SpellManager.Q.GetPrediction(target);
+                        if (predQ.HitChance >= ConfigList.ChanceHit.GetHitChance(ConfigList.ChanceHit.AutoHarassMinToUseQ))
+                        {
+                            SpellManager.LastAutoHarass = Environment.TickCount;
+                            SpellManager.Q.Cast(predQ.CastPosition); return;
+                        }
                     }
                 }
             }

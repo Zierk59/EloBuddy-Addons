@@ -24,10 +24,10 @@ namespace ReRyze
             {
                 // Menu
                 Combo.Initialize();
-                Drawing.Initialize();
                 Farm.Initialize();
-                UltimateTeleport.Initialize();
                 Harass.Initialize();
+                Drawing.Initialize();
+                UltimateTeleport.Initialize();
                 ChanceHit.Initialize();
                 ManaManager.Initialize();
                 Misc.Initialize();

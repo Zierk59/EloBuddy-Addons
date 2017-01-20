@@ -10,6 +10,7 @@ namespace ReRyze.ConfigList
         private static readonly CheckBox _KSWithW;
         private static readonly CheckBox _KSWithE;
 
+        private static readonly CheckBox _GapClose;
         private static readonly CheckBox _FleeWithEWQ;
 
         private static readonly CheckBox _SkinManagerStatus;
@@ -49,6 +50,10 @@ namespace ReRyze.ConfigList
         {
             get { return _MaxRandomDelay.CurrentValue; }
         }
+        public static bool GapCloser
+        {
+            get { return _GapClose.CurrentValue; }
+        }
 
         static Misc()
         {
@@ -57,6 +62,7 @@ namespace ReRyze.ConfigList
             _KSWithQ = Menu.Add("KSWithQ", new CheckBox("Enable Kill Steal with Q."));
             _KSWithW = Menu.Add("KSWithW", new CheckBox("Enable Kill Steal with W."));
             _KSWithE = Menu.Add("KSWithE", new CheckBox("Enable Kill Steal with E."));
+            _GapClose = Menu.Add("GapClose", new CheckBox("Enable gap-close with W."));
             _FleeWithEWQ = Menu.Add("FleeWithEWQ", new CheckBox("Enable EWQ in flee mode."));
 
             Menu.AddGroupLabel("Skin manager");

@@ -33,6 +33,6 @@ using System.Resources;
 // Można określać wszystkie wartości lub używać domyślnych numerów kompilacji i poprawki 
 // poprzez użycie '*', jak pokazane jest poniżej:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("6.14.2")]
-[assembly: AssemblyFileVersion("6.14.2")]
+[assembly: AssemblyVersion("6.14.3")]
+[assembly: AssemblyFileVersion("6.14.3")]
 [assembly: NeutralResourcesLanguageAttribute("en")]
