@@ -34,8 +34,9 @@ namespace ReKatarina.Utility
                     {
                         if (!d.IsUnderEnemyTurret() && d.CountEnemyChampionsInRange(SpellManager.E.Range) <= 1 && Player.Instance.HealthPercent >= 50)
                         {
-                            if (d.CountEnemyMinionsInRange(SpellManager.W.Range + 75) <= 0) return;
-                            SpellManager.E.Cast(Damage.GetBestDaggerPoint(d, minions.FirstOrDefault()));
+                            var best_pos = Damage.GetBestDaggerPoint(d, minions.FirstOrDefault());
+                            if (best_pos.CountEnemyMinionsInRange(SpellManager.W.Range) <= 0) return;
+                            SpellManager.E.Cast(best_pos);
                         }
                     }
                 }

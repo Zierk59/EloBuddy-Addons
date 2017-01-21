@@ -29,16 +29,19 @@ namespace ReKatarina.ReCore.Core.Items
                         item.Cast();
                         ItemManager.SetLastUse(item.Id);
                         break;
+
                     case ItemId.Refillable_Potion:
                         if (!MenuHelper.GetCheckBoxValue(ConfigList.CItems.Menu, "Items.Consumer.RefillablePotion.Status")) continue;
                         item.Cast();
                         ItemManager.SetLastUse(item.Id);
                         break;
+
                     case ItemId.Hunters_Potion:
                         if (!MenuHelper.GetCheckBoxValue(ConfigList.CItems.Menu, "Items.Consumer.HuntersPotion.Status")) continue;
                         item.Cast();
                         ItemManager.SetLastUse(item.Id);
                         break;
+
                     case ItemId.Corrupting_Potion:
                         if (!MenuHelper.GetCheckBoxValue(ConfigList.CItems.Menu, "Items.Consumer.CorruptingPotion.Status")) continue;
                         item.Cast();

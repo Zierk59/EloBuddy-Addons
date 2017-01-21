@@ -65,15 +65,23 @@ namespace ReKatarina.ReCore.ConfigList
             Menu.CreateCheckBox("Use Redemption", "Items.Deffensive.Redemption.Status");
 
             Menu.CreateSlider("Use if sum of allies HP <= {0}%", "Items.Deffensive.Redemption.Hp", 50, 1, 100);
-            Menu.CreateSlider("Use only if allies in range >= {0}", "Items.Deffensive.Redemption.Enemies", 2, 0, 4);
+            Menu.CreateSlider("Use only if allies in range >= {0}", "Items.Deffensive.Redemption.Allies", 2, 0, 4);
             Menu.CreateSlider("Use only if enemies near >= {0}", "Items.Deffensive.Redemption.Enemies", 1, 1, 5);
+            Menu.AddSeparator(15);
+            #endregion
+            #region Randuin's Omen
+            Menu.AddGroupLabel("Randuin's Omen");
+            Menu.CreateCheckBox("Use Randuin's Omen", "Items.Deffensive.Omen.Status");
+            Menu.CreateCheckBox("Use only in combo mode", "Items.Deffensive.Omen.ComboOnly");
+
+            Menu.CreateSlider("Use only if my HP >= {0}%", "Items.Deffensive.Omen.Me.MinHealth", 35, 1, 100);
+            Menu.CreateSlider("Use only if target HP <= {0}%", "Items.Deffensive.Omen.Enemy.MinHealth", 55, 1, 100);
+            Menu.CreateSlider("Use only if enemies in range >= {0}", "Items.Deffensive.Omen.Enemy.Count", 1, 1, 5);
             Menu.AddSeparator(15);
             #endregion
 
             /*  TODO LIST
              *  - Mikael's Crucible
-             *  - Redemption
-             *  - Randuin's Omen
              *  - Zeke's Harbinger
              * */
         }

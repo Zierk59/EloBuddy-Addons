@@ -11,7 +11,7 @@ namespace ReKatarina
     {
         public static bool IsUnderEnemyTurret(this Vector3 d)
         {
-            return EntityManager.Turrets.Enemies.Any((Obj_AI_Turret turret) => turret.IsInRange(d, turret.GetAutoAttackRange(null)));
+            return EntityManager.Turrets.Enemies.Any((Obj_AI_Turret turret) => turret.IsInRange(d, turret.GetAutoAttackRange(null)) && turret.IsAlive());
         }
     }
 
@@ -30,13 +30,6 @@ namespace ReKatarina
             return 0.55f;
         }
 
-        public static double GetQDamage(Obj_AI_Base target)
-        {
-            if (SpellManager.Q.IsReady())
-                return Player.Instance.GetSpellDamage(target, SpellSlot.Q, DamageLibrary.SpellStages.Default);
-            return 0;
-        }
-
         public static double GetPDamage(Obj_AI_Base target)
         {
             int singleDagger =
@@ -49,7 +42,14 @@ namespace ReKatarina
                 if (target.Position.IsInRange(dagger, SpellManager.W.Range + 75))
                     totalDamage += singleDagger;
 
-            return totalDamage;
+            return totalDamage * (100 - target.PercentMagicReduction)/100;
+        }
+
+        public static double GetQDamage(Obj_AI_Base target)
+        {
+            if (SpellManager.Q.IsReady())
+                return Player.Instance.GetSpellDamage(target, SpellSlot.Q, DamageLibrary.SpellStages.Default);
+            return 0;
         }
 
         public static double GetEDamage(Obj_AI_Base target)

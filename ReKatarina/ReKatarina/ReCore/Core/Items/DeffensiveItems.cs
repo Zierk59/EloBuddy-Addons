@@ -89,7 +89,29 @@ namespace ReKatarina.ReCore.Core.Items
                         break;
 
                     case ItemId.Redemption:
+                        if (!MenuHelper.GetCheckBoxValue(ConfigList.DItems.Menu, "Items.Deffensive.Redemption.Status")) continue;
+
+                        var rAllies = EloBuddy.SDK.EntityManager.Heroes.Allies.Where(a => a.IsInRange(Managers.EntityManager.GetAlliesGroup(5500, 550, MenuHelper.GetSliderValue(ConfigList.DItems.Menu, "Items.Deffensive.Redemption.Allies")), 550));
+                        if (rAllies.Count() < MenuHelper.GetSliderValue(ConfigList.DItems.Menu, "Items.Deffensive.Redemption.Allies")) continue;
+                        if (rAllies.Sum(e => Prediction.Health.GetPrediction(e, 2500)) / rAllies.Sum(e => e.TotalMaxHealth()) > MenuHelper.GetSliderValue(ConfigList.DItems.Menu, "Items.Deffensive.Redemption.Hp")) continue;
+
+                        List<Vector3> vectors = new List<Vector3>();
+                        foreach (var a in rAllies) vectors.Add(a.Position);
+                        item.Cast(Managers.EntityManager.CenterOfVectors(vectors));
+                        ItemManager.SetLastUse(item.Id);
+                        InfoManager.Show(item, Player.Instance);
                         break;
+
+                    case ItemId.Randuins_Omen:
+                        if (!MenuHelper.GetCheckBoxValue(ConfigList.DItems.Menu, "Items.Deffensive.Omen.Status")) continue;
+                        if (MenuHelper.GetCheckBoxValue(ConfigList.DItems.Menu, "Items.Deffensive.Omen.ComboOnly") && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo)) continue;
+                        if (Player.Instance.CountEnemyChampionsInRange(550) < MenuHelper.GetSliderValue(ConfigList.DItems.Menu, "Items.Deffensive.Omen.Enemies")) continue;
+                        if (Player.Instance.HealthPercent < MenuHelper.GetSliderValue(ConfigList.DItems.Menu, "Items.Deffensive.Omen.Me.MinHealth")) continue;
+                        if (target.HealthPercent > MenuHelper.GetSliderValue(ConfigList.DItems.Menu, "Items.Deffensive.Omen.Enemy.MinHealth")) continue;
+                        ItemManager.SetLastUse(item.Id);
+                        item.Cast();
+                        break;
+                        var t = EloBuddy.SDK.EntityManager.Heroes.Enemies.Where(e => e.IsValidTarget(1500) && e.ChampionName == "Rengar");
                 }
             }
         }

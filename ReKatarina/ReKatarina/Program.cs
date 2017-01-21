@@ -37,8 +37,7 @@ namespace ReKatarina
 
         private static void Player_OnIssueOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
         {
-            if (!sender.IsMe && !Damage.HasRBuff()) return;
-            args.Process = false;
+            if (sender.IsMe && Damage.HasRBuff()) args.Process = false;
         }
 
         private static void OnEndScene(EventArgs args)

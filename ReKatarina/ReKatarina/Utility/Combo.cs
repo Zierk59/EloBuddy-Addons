@@ -1,6 +1,7 @@
 ﻿using System;
 using EloBuddy;
 using EloBuddy.SDK;
+using SharpDX;
 
 namespace ReKatarina.Utility
 {
@@ -22,7 +23,7 @@ namespace ReKatarina.Utility
 
                 if (target.Health <= Damage.GetQDamage(target) + Damage.GetEDamage(target))
                 {
-                    SpellManager.E.Cast(target.Position);
+                    SpellManager.E.CastE(target.Position);
                     SpellManager.Q.Cast(target);
                 }
                 return;
@@ -55,10 +56,10 @@ namespace ReKatarina.Utility
             if (SpellManager.E.IsReady() && t.IsInRange(Player.Instance.Position, SpellManager.E.Range) && ConfigList.Combo.ComboE)
             {
                 var d = Dagger.GetClosestDagger();
-                if (t.Position.IsInRange(d, SpellManager.W.Range)) SpellManager.E.Cast(Damage.GetBestDaggerPoint(d, t));
+                if (t.Position.IsInRange(d, SpellManager.W.Range)) SpellManager.E.CastE(Damage.GetBestDaggerPoint(d, t));
                 else
                     if (Player.Instance.Distance(t) >= SpellManager.W.Range)
-                    SpellManager.E.Cast(t.Position);
+                    SpellManager.E.CastE(t.Position);
             }
 
             if (SpellManager.W.IsLearned && !SpellManager.W.IsOnCooldown && ConfigList.Combo.ComboW)
@@ -76,6 +77,11 @@ namespace ReKatarina.Utility
             {
                 if (Player.Instance.CountEnemyChampionsInRange(ConfigList.Combo.MaxRCastRange) < ConfigList.Combo.MinToUseR) return;
                 if (Damage.GetQDamage(t) + Damage.GetPDamage(t) + Damage.GetEDamage(t) + Player.Instance.GetAutoAttackDamage(t, true) >= t.TotalShieldHealth()) return;
+                if (Orbwalker.IsAutoAttacking && !Orbwalker.DisableAttacking)
+                {
+                    Orbwalker.DisableAttacking = true;
+                    Orbwalker.ResetAutoAttack();
+                }
                 SpellManager.R.Cast();
                 Damage.FreezePlayer();
             }
@@ -85,10 +91,10 @@ namespace ReKatarina.Utility
             if (SpellManager.E.IsReady() && t.IsInRange(Player.Instance.Position, SpellManager.E.Range) && ConfigList.Combo.ComboE)
             {
                 var d = Dagger.GetClosestDagger();
-                if (t.Position.IsInRange(d, SpellManager.W.Range)) SpellManager.E.Cast(Damage.GetBestDaggerPoint(d, t));
+                if (t.Position.IsInRange(d, SpellManager.W.Range)) SpellManager.E.CastE(Damage.GetBestDaggerPoint(d, t));
                 else
                     if (Player.Instance.Distance(t) >= SpellManager.W.Range)
-                    SpellManager.E.Cast(t.Position);
+                    SpellManager.E.CastE(t.Position);
             }
 
             if (SpellManager.Q.CanCast(t) && ConfigList.Combo.ComboQ)
@@ -106,6 +112,11 @@ namespace ReKatarina.Utility
             {
                 if (Player.Instance.CountEnemyChampionsInRange(ConfigList.Combo.MaxRCastRange) < ConfigList.Combo.MinToUseR) return;
                 if (Damage.GetQDamage(t) + Damage.GetPDamage(t) + Damage.GetEDamage(t) + Player.Instance.GetAutoAttackDamage(t, true) >= t.TotalShieldHealth()) return;
+                if (Orbwalker.IsAutoAttacking && !Orbwalker.DisableAttacking)
+                {
+                    Orbwalker.DisableAttacking = true;
+                    Orbwalker.ResetAutoAttack();
+                }
                 SpellManager.R.Cast();
                 Damage.FreezePlayer();
             }
@@ -119,11 +130,11 @@ namespace ReKatarina.Utility
 
             if (SpellManager.E.IsReady() && t.IsInRange(Player.Instance.Position, SpellManager.E.Range) && ConfigList.Combo.ComboE)
             {
-                var d = Dagger.GetClosestDagger();
-                if (t.Position.IsInRange(d, SpellManager.W.Range)) SpellManager.E.Cast(Damage.GetBestDaggerPoint(d, t));
+                var d = Damage.GetBestDaggerPoint(Dagger.GetClosestDagger(), t);
+                if (t.Position.IsInRange(d, SpellManager.W.Range)) SpellManager.E.CastE(d);
                 else
                     if (Player.Instance.Distance(t) >= SpellManager.W.Range)
-                        SpellManager.E.Cast(t.Position);
+                        SpellManager.E.CastE(t.Position);
             }
 
             if (SpellManager.W.IsLearned && !SpellManager.W.IsOnCooldown && ConfigList.Combo.ComboW)
@@ -136,9 +147,15 @@ namespace ReKatarina.Utility
             {
                 if (Player.Instance.CountEnemyChampionsInRange(ConfigList.Combo.MaxRCastRange) < ConfigList.Combo.MinToUseR) return;
                 if (Damage.GetQDamage(t) + Damage.GetPDamage(t) + Damage.GetEDamage(t) + Player.Instance.GetAutoAttackDamage(t, true) >= t.TotalShieldHealth()) return;
+                if (Orbwalker.IsAutoAttacking && !Orbwalker.DisableAttacking)
+                {
+                    Orbwalker.DisableAttacking = true;
+                    Orbwalker.ResetAutoAttack();
+                }
+
                 SpellManager.R.Cast();
                 Damage.FreezePlayer();
             }
-        } // QEWR
+        } // QEWR        
     }
 }
