@@ -11,9 +11,10 @@
     <AssemblyName>ReGaren</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,6 +45,10 @@
     <Reference Include="SharpDX">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\SharpDX.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.Direct3D9, Version=2.6.3.0, Culture=neutral, PublicKeyToken=2306ab36a61019a8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -55,23 +60,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigList\Combo.cs" />
-    <Compile Include="Config.cs" />
-    <Compile Include="ConfigList\Drawing.cs" />
-    <Compile Include="ConfigList\Farm.cs" />
-    <Compile Include="ConfigList\Harass.cs" />
-    <Compile Include="ConfigList\Misc.cs" />
+    <Compile Include="Config\Combo.cs" />
+    <Compile Include="MenuLoader.cs" />
+    <Compile Include="Config\Drawing.cs" />
+    <Compile Include="Config\Farm.cs" />
+    <Compile Include="Config\Harass.cs" />
+    <Compile Include="Config\Misc.cs" />
     <Compile Include="Damage.cs" />
+    <Compile Include="Humanizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReCore\Config\CItems.cs" />
+    <Compile Include="ReCore\Config\Cleansers.cs" />
+    <Compile Include="ReCore\Config\DItems.cs" />
+    <Compile Include="ReCore\Config\OItems.cs" />
+    <Compile Include="ReCore\Config\Protector.cs" />
+    <Compile Include="ReCore\Config\Settings.cs" />
+    <Compile Include="ReCore\Config\Summoners.cs" />
+    <Compile Include="ReCore\Core\DrawingsUpdater.cs" />
+    <Compile Include="ReCore\Core\Interfaces\IItem.cs" />
+    <Compile Include="ReCore\Core\Interfaces\ISpell.cs" />
+    <Compile Include="ReCore\Core\Items\ConsumerItems.cs" />
+    <Compile Include="ReCore\Core\Items\DeffensiveItems.cs" />
+    <Compile Include="ReCore\Core\Items\OffensiveItems.cs" />
+    <Compile Include="ReCore\Core\ItemUpdater.cs" />
+    <Compile Include="ReCore\Core\Spells\Barrier.cs" />
+    <Compile Include="ReCore\Core\Spells\Cleanse.cs" />
+    <Compile Include="ReCore\Core\Spells\Exhaust.cs" />
+    <Compile Include="ReCore\Core\Spells\Heal.cs" />
+    <Compile Include="ReCore\Core\Spells\Ignite.cs" />
+    <Compile Include="ReCore\Core\Spells\Smite.cs" />
+    <Compile Include="ReCore\Core\Spells\Snowball.cs" />
+    <Compile Include="ReCore\Core\SummonerUpdater.cs" />
+    <Compile Include="ReCore\Databases\DangerousSpells.cs" />
+    <Compile Include="ReCore\Managers\DangerManager.cs" />
+    <Compile Include="ReCore\Managers\EntityManager.cs" />
+    <Compile Include="ReCore\Managers\InfoManager.cs" />
+    <Compile Include="ReCore\Managers\ItemManager.cs" />
+    <Compile Include="ReCore\Loader.cs" />
+    <Compile Include="ReCore\Managers\SummonerManager.cs" />
+    <Compile Include="ReCore\Utility\ItemsList.cs" />
+    <Compile Include="ReCore\Utility\MenuHelper.cs" />
+    <Compile Include="ReCore\Utility\SummonerList.cs" />
     <Compile Include="SpellManager.cs" />
-    <Compile Include="Utility\Combo.cs" />
-    <Compile Include="Utility\Farm.cs" />
-    <Compile Include="Utility\Flee.cs" />
-    <Compile Include="Utility\Harass.cs" />
-    <Compile Include="Utility\Indicator.cs" />
-    <Compile Include="Utility\LastHit.cs" />
-    <Compile Include="Utility\PermaActive.cs" />
+    <Compile Include="Modes\Combo.cs" />
+    <Compile Include="Modes\LaneClear.cs" />
+    <Compile Include="Modes\Harass.cs" />
+    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\Indicator.cs" />
+    <Compile Include="Modes\JungleClear.cs" />
+    <Compile Include="Modes\LastHit.cs" />
+    <Compile Include="Modes\PermaActive.cs" />
+    <Compile Include="Utils\MenuHelper.cs" />
+    <Compile Include="Utils\Other.cs" />
+    <Compile Include="VersionChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,0 +1,15 @@
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\ReWarwick.exe.config
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\ReWarwick.exe
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\ReWarwick.pdb
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\EloBuddy.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\EloBuddy.SDK.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\SharpDX.Direct3D9.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\SharpDX.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\EloBuddy.Sandbox.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\bin\Debug\Newtonsoft.Json.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\obj\Debug\ReWarwick.csprojResolveAssemblyReference.cache
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\obj\Debug\ReWarwick.exe
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReWarwick\obj\Debug\ReWarwick.pdb
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReGaren\ReWarwick\bin\Debug\ReWarwick.exe.config
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReGaren\ReWarwick\obj\Debug\ReWarwick.exe
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReGaren\ReWarwick\obj\Debug\ReWarwick.pdb

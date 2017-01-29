@@ -1,15 +1,11 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
-using EloBuddy.SDK.Utils;
-using SharpDX;
+using ReGaren.Modes;
+using ReGaren.ReCore;
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using Color = System.Drawing.Color;
-using ReGaren.Utility;
+using ReGaren.Utils;
 
 namespace ReGaren
 {
@@ -22,61 +18,106 @@ namespace ReGaren
 
         private static void Loading_OnLoadingComplete(EventArgs args)
         {
-            if (Player.Instance.ChampionName != "Garen")
-            {
-                return;
-            }
-
-            Config.Initialize();
+            if (Player.Instance.ChampionName != "Garen") return;
+            
+            VersionChecker.Check();
+            Loader.Initialize(); // ReCore BETA
+            Humanizer.Initialize();
+            MenuLoader.Initialize();
             Drawing.OnDraw += OnDraw;
             Game.OnTick += OnTick;
             Game.OnUpdate += OnTick;
+            Orbwalker.OnUnkillableMinion += LastHit.OnUnkillableMinion;
             Drawing.OnEndScene += OnEndScene;
 
-            Chat.Print("ReGaren has been loaded. GL HF;");
+            Interrupter.OnInterruptableSpell += Interrupter_OnInterruptableSpell;
+
+            Chat.Print("<font color='#FFFFFF'>ReGaren v." + VersionChecker.AssVersion + " has been loaded.</font>");
         }
 
         private static void OnEndScene(EventArgs args)
         {
-            if (Player.Instance.IsDead || !ConfigList.Drawing.DrawDI)
+            if (Player.Instance.IsDead || !Config.Drawing.Menu.GetCheckBoxValue("Config.Drawing.Indicator"))
                 return;
 
             Indicator.Execute();
         }
 
-        private static void OnTick(EventArgs args)
+        public static void OnTick(EventArgs args)
         {
             if (Player.Instance.IsDead || Player.Instance.IsRecalling()) 
                 return;
 
             PermaActive.Execute();
             var flags = Orbwalker.ActiveModesFlags;
+            #region Flags checker
             if (flags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
-                Combo.Execute();
+                try
+                {
+                    Combo.Execute();
+                }
+                catch (Exception e) 
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             }
             if (flags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
-                Harass.Execute();
+                try
+                {
+                    Harass.Execute();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             }
             if (flags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
-                LastHit.Execute();
+                try
+                {
+                    LastHit.Execute();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             }
             if (flags.HasFlag(Orbwalker.ActiveModes.LaneClear))
             {
-                Farm.Execute();
+                try
+                {
+                    LaneClear.Execute();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             }
             if (flags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
-                Farm.Execute();
+                try
+                {
+                    JungleClear.Execute();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             }
-            if (flags.HasFlag(Orbwalker.ActiveModes.Flee))
-            {
-                Flee.Execute();
-            }
+            #endregion
         }
-        
+
+        private static void Interrupter_OnInterruptableSpell(Obj_AI_Base sender, Interrupter.InterruptableSpellEventArgs e)
+        {
+            if (!SpellManager.Q.IsReady() || !Config.Misc.Menu.GetCheckBoxValue("Config.Misc.Another.Interrupter") || !sender.IsValidTarget(Player.Instance.GetAutoAttackRange())) return;
+
+            SpellManager.Q.Cast();
+            Orbwalker.ResetAutoAttack();
+            Core.DelayAction(() => Player.IssueOrder(GameObjectOrder.AttackTo, sender), Config.Misc.Menu.GetSliderValue("Config.Misc.Another.Delay"));
+        }
+
         private static void OnDraw(EventArgs args)
         {
             if (Player.Instance.IsDead)
@@ -86,20 +127,13 @@ namespace ReGaren
             {
                 switch (spell.Slot)
                 {
-                    case SpellSlot.Q:
-                        if (!ConfigList.Drawing.DrawQ)
-                            continue;
-                        break;
-                    case SpellSlot.W:
-                        continue;
                     case SpellSlot.E:
-                        if (!ConfigList.Drawing.DrawE)
-                            continue;
+                        if (!Config.Drawing.Menu.GetCheckBoxValue("Config.Drawing.E")) continue;
                         break;
                     case SpellSlot.R:
-                        if (!ConfigList.Drawing.DrawR)
-                            continue;
+                        if (!Config.Drawing.Menu.GetCheckBoxValue("Config.Drawing.R")) continue;
                         break;
+                    default: continue;
                 }
                 Circle.Draw(spell.GetColor(), spell.Range, Player.Instance);
             }

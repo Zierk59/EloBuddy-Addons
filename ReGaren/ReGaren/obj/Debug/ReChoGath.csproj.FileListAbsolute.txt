@@ -1,0 +1,15 @@
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\ReChoGath.exe.config
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\obj\Debug\ReChoGath.csprojResolveAssemblyReference.cache
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\ReChoGath.exe
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\ReChoGath.pdb
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\EloBuddy.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\EloBuddy.SDK.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\SharpDX.Direct3D9.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\SharpDX.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\EloBuddy.Sandbox.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\bin\Debug\Newtonsoft.Json.dll
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\obj\Debug\ReChoGath.exe
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReChoGath\ReChoGath\obj\Debug\ReChoGath.pdb
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReChoGath\bin\Debug\ReChoGath.exe.config
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReChoGath\obj\Debug\ReChoGath.exe
+D:\Users\Reekspear\Desktop\EloBuddy-Addons-WIP\ReWarwick\ReChoGath\obj\Debug\ReChoGath.pdb
